@@ -26,28 +26,22 @@ import {
 } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgTemplateOutlet } from '@angular/common';
-import {
-  ColumnChartV2Component
-} from '../../components/column-chart/column-chart-v2.component';
 
 @Component({
   selector: 'app-column-chart-container',
   standalone: true,
-  imports: [ColumnChartComponent, NgTemplateOutlet, ColumnChartV2Component],
+  imports: [ColumnChartComponent, NgTemplateOutlet, ColumnChartComponent],
   templateUrl: './column-chart.container.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ColumnChartContainerComponent {
-  protected readonly CHART_HEIGHT_CSS_CLASS: string = 'h-96';
+  protected readonly CHART_HEIGHT_CSS_CLASS: string = 'h-72';
 
   private service = inject(ChartsService);
 
   public chartId = input.required<ColumnChart['id']>();
-
   public chartDataSeries = signal<DataSeries[]>([]);
-
   public isLoadingData = signal<boolean>(false);
-
   public loadingError = signal<string | null>(null);
 
   private chartId$: Observable<ColumnChart['id']> = toObservable(this.chartId);
@@ -66,7 +60,7 @@ export class ColumnChartContainerComponent {
             this.chartDataSeries.set(this.mapChartData(chartData));
           }),
           catchError((error: HttpErrorResponse) => {
-            this.loadingError.set(`Could not load chart "${id}". An error occurred: ${error.message}`);
+            this.loadingError.set(`Could not load chart "${ id }". An error occurred: ${ error.message }`);
             this.isLoadingData.set(false);
 
             return of();

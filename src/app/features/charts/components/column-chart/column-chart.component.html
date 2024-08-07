@@ -1,60 +1,66 @@
-<div class="chart">
-  <div class="chart-wrapper">
-    <div class="chart-bg-scale">
-      @for (oneTickValue of yAxisTicks(); let isLast = $last; track oneTickValue) {
+<div class="chart-wrapper {{ cssClass() }}">
+  <div class="y-axis-wrapper">
+    <ul class="y-axis">
+      @for (oneTickValue of yAxisTicks(); let index = $index; let count = $count; let isLast = $last; let isFirst = $first; track oneTickValue) {
         @if (!isLast) {
-          <span class="chart-y-axis-bg-tick"></span>
-        }
-      }
-    </div>
-
-    <div class="chart-content">
-      @for (oneDataSet of groupedDataEntriesY(); track oneDataSet.x) {
-        <div class="chart-bars">
-          @for (oneBarData of oneDataSet; let index = $index; track oneBarData) {
-            <div class="{{ index | chartBarColor }} chart-data-bar" [style.height.%]="oneBarData.y">
-            </div>
-          }
-        </div>
-      }
-    </div>
-  </div>
-
-  <ul class="chart-x-axis">
-    @for (oneDataSetXLabel of groupedDataEntriesX(); track oneDataSetXLabel) {
-      <li class="chart-x-axis-label">
-        <span>{{ oneDataSetXLabel }}</span>
-      </li>
-    }
-  </ul>
-
-  <ul class="chart-y-axis">
-    @for (oneTickValue of yAxisTicks(); let index = $index; let count = $count; let isLast = $last; let isFirst = $first; track oneTickValue) {
-      @if (!isLast) {
-        <li class="chart-y-axis-tick">
+          <li class="y-axis-tick">
           <span
-            class="y-tick-label"
-            [ngClass]="{'max-y-tick-label': isFirst}"
+            class="y-axis-tick-label"
+            [ngClass]="{'max-y-axis-tick-label': isFirst}"
           >
             {{ oneTickValue | number }}
           </span>
 
-          @if (index + 1 === count - 1) {
-            <span class="y-tick-label min-y-tick-label">{{ yAxisTicks()[count - 1] | number }}</span>
-          }
-        </li>
+            @if (index + 1 === count - 1) {
+              <span
+                class="y-axis-tick-label min-y-axis-tick-label">{{ yAxisTicks()[count - 1] | number }}</span>
+            }
+          </li>
+        }
       }
-    }
-  </ul>
+    </ul>
+  </div>
+
+  <div class="flex-1 flex flex-col gap-4">
+    <div class="chart-pane-wrapper">
+      <ul class="chart-bg-scale">
+        @for (oneTickValue of yAxisTicks(); let isLast = $last; track oneTickValue) {
+          @if (!isLast) {
+            <li class="chart-bg-scale-tick"></li>
+          }
+        }
+      </ul>
+
+      <div class="chart-content-wrapper">
+        <div class="chart-content">
+          @for (oneXDataSeries of xAxisData() | keyvalue; track oneXDataSeries.key) {
+            <div class="chart-bars-group">
+              <div class="chart-bars">
+                @for (itemData of oneXDataSeries.value; track itemData) {
+                  <div
+                    [style.height.%]="itemData.y"
+                    class="data-bar {{ seriesLabelColorClass()[itemData.seriesName] }}"
+                    [title]="itemData.seriesName"
+                  ></div>
+                }
+              </div>
+
+              <div class="x-tick-label">{{ oneXDataSeries.key }}</div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="chart-legend flex justify-center">
-  <ul class="flex gap-4">
-    @for (oneItem of legend(); let index = $index; track oneItem) {
-      <li class="flex gap-2 items-center">
-        <span class="{{ index | chartBarColor }} inline-block size-2 rounded-full"></span>
-        <span>{{ oneItem }}</span>
-      </li>
-    }
-  </ul>
+<div class="legend">
+  @for (seriesName of seriesLabels(); let index = $index; track seriesName) {
+    <div class="legend-item">
+      <span
+        class="legend-item-icon {{ seriesLabelColorClass()[seriesName] }}"></span>
+      <span>{{ seriesName }}</span>
+    </div>
+  }
 </div>
+

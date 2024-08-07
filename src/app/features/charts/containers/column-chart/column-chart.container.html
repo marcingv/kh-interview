@@ -3,10 +3,10 @@
 } @else if (loadingError()) {
   <ng-container *ngTemplateOutlet="error"></ng-container>
 } @else {
-    <app-column-chart-v2
+    <app-column-chart
       [dataSeries]="chartDataSeries()"
       [cssClass]="CHART_HEIGHT_CSS_CLASS"
-    ></app-column-chart-v2>
+    ></app-column-chart>
 }
 
 <ng-template #loading>

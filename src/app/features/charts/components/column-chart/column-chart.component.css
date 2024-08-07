@@ -1,74 +1,89 @@
-.chart {
-  @apply relative m-4;
+/** General Layout Definition **/
+.chart-wrapper {
+  @apply flex gap-12;
+  --x-axis-height: 40px;
 }
 
-.chart-wrapper {
-  @apply h-96 flex gap-4 relative;
+.y-axis-wrapper {
+  @apply ms-4;
+  margin-bottom: calc(var(--x-axis-height));
+}
+
+.chart-pane-wrapper {
+  @apply flex-1 relative;
+}
+
+.chart-content-wrapper {
+  @apply absolute size-full overflow-x-auto;
 }
 
 .chart-content {
-  @apply absolute top-0 bottom-0 left-0 right-0 flex;
+  @apply size-full flex gap-8;
 }
 
-.chart-wrapper, .chart-x-axis {
-  @apply ms-20;
+/** Chart bars **/
+.chart-bars-group {
+  @apply flex-1 flex flex-col;
 }
 
-/** Chart Bg **/
+.chart-bars {
+  @apply flex-1 justify-center flex gap-2 items-end;
+}
+
+.data-bar {
+  @apply w-5 rounded-t-md cursor-pointer hover:opacity-85;
+}
+
+/** X Axis **/
+.x-tick-label {
+  @apply flex items-center justify-center font-thin;
+  height: var(--x-axis-height);
+}
+
+/** Chart bg scale **/
 .chart-bg-scale {
-  @apply flex-1 flex flex-col border-b;
+  @apply flex flex-col absolute left-0 right-0 top-0;
+  bottom: var(--x-axis-height);
 }
 
-.chart-y-axis-bg-tick {
-  @apply flex-1 odd:bg-slate-100 border-t border-slate-200;
-}
-/** **/
-
-/** X Axis Styles **/
-.chart-x-axis {
-  @apply flex items-center gap-4 h-8;
+.chart-bg-scale-tick {
+  @apply flex-1 odd:bg-slate-50 border-t border-slate-200;
 }
 
-.chart-x-axis-label {
-  @apply flex-1 text-center font-thin;
-}
-/** **/
-
-/** Y Axis Styles **/
-.chart-y-axis {
-  @apply absolute top-0 left-0 bottom-8;
-  @apply text-end;
-  @apply w-12 me-8;
-  @apply flex flex-col;
+.chart-bg-scale-tick:last-of-type {
+  @apply border-b;
 }
 
-.chart-y-axis-tick {
-  @apply flex flex-col flex-1 font-thin;
+/** Y Axis **/
+ul.y-axis {
+  @apply h-full flex flex-col text-end font-thin;
 }
 
-.chart-y-axis-tick:last-of-type {
-  @apply justify-start;
+li.y-axis-tick {
+  @apply flex-1 flex flex-col;
 }
 
-.chart-y-axis-tick:last-of-type {
+.y-axis-tick-label {
+  @apply leading-none;
+}
+
+.y-axis-tick-label:not(.max-y-axis-tick-label):not(.min-y-axis-tick-label) {
+  @apply relative -top-2;
+}
+
+li.y-axis-tick:last-of-type {
   @apply justify-between;
 }
 
-.y-tick-label {
-  @apply leading-none relative -top-2;
+/** Legend **/
+.legend {
+  @apply mt-4 flex flex-wrap gap-8 justify-center font-thin;
 }
 
-.min-y-tick-label {
-  @apply top-0;
-}
-/** **/
-
-/** Chart Bars **/
-.chart-bars {
-  @apply flex gap-2 flex-1 items-end justify-center;
+.legend-item {
+  @apply flex gap-2 items-center;
 }
 
-.chart-data-bar {
-  @apply block w-6 rounded-t-lg;
+.legend-item-icon {
+  @apply inline-block size-2 rounded-full;
 }
-/** **/
