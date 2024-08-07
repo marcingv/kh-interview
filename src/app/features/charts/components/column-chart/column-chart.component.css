@@ -1,18 +1,74 @@
-.chart-area {
-  @apply relative;
+.chart {
+  @apply relative m-4;
 }
 
+.chart-wrapper {
+  @apply h-96 flex gap-4 relative;
+}
+
+.chart-content {
+  @apply absolute top-0 bottom-0 left-0 right-0 flex;
+}
+
+.chart-wrapper, .chart-x-axis {
+  @apply ms-20;
+}
+
+/** Chart Bg **/
+.chart-bg-scale {
+  @apply flex-1 flex flex-col border-b;
+}
+
+.chart-y-axis-bg-tick {
+  @apply flex-1 odd:bg-slate-100 border-t border-slate-200;
+}
+/** **/
+
+/** X Axis Styles **/
 .chart-x-axis {
-  @apply bg-orange-500;
   @apply flex items-center gap-4 h-8;
 }
 
+.chart-x-axis-label {
+  @apply flex-1 text-center font-thin;
+}
+/** **/
+
+/** Y Axis Styles **/
 .chart-y-axis {
+  @apply absolute top-0 left-0 bottom-8;
+  @apply text-end;
+  @apply w-12 me-8;
   @apply flex flex-col;
-  @apply absolute top-0 left-0 bottom-0;
-  @apply bg-red-500;
 }
 
 .chart-y-axis-tick {
-  @apply flex-1;
+  @apply flex flex-col flex-1 font-thin;
 }
+
+.chart-y-axis-tick:last-of-type {
+  @apply justify-start;
+}
+
+.chart-y-axis-tick:last-of-type {
+  @apply justify-between;
+}
+
+.y-tick-label {
+  @apply leading-none relative -top-2;
+}
+
+.min-y-tick-label {
+  @apply top-0;
+}
+/** **/
+
+/** Chart Bars **/
+.chart-bars {
+  @apply flex gap-2 flex-1 items-end justify-center;
+}
+
+.chart-data-bar {
+  @apply block w-6 rounded-t-lg;
+}
+/** **/

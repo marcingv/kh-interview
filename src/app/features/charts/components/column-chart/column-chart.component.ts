@@ -9,8 +9,9 @@ import {
   ColumnChart,
   ColumnChartDataElement
 } from '../../models/column-chart.model';
-import { JsonPipe } from '@angular/common';
+import { DecimalPipe, JsonPipe, NgClass } from '@angular/common';
 import { ChartBarBgColorPipe } from '../../pipes/chart-bar-bg-color.pipe';
+import { tick } from '@angular/core/testing';
 
 interface GroupedChartData {
   [year: number]: Array<ColumnChartDataElement>;
@@ -22,13 +23,33 @@ interface GroupedChartData {
   standalone: true,
   imports: [
     JsonPipe,
-    ChartBarBgColorPipe
+    ChartBarBgColorPipe,
+    DecimalPipe,
+    NgClass
   ],
   templateUrl: './column-chart.component.html',
   styleUrl: './column-chart.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ColumnChartComponent {
+  private readonly MAX_Y_VALUE: number = 100;
+  private readonly MIN_Y_VALUE: number = 0;
+  private readonly DEFAULT_Y_NUM_OF_TICKS: number = 6;
+
+  public yAxisNumOfTicks = input<number>(this.DEFAULT_Y_NUM_OF_TICKS);
+
+  public yAxisTicks = computed(() => {
+    const range: number = this.MAX_Y_VALUE - this.MIN_Y_VALUE;
+    const tickDelta: number = range / (this.yAxisNumOfTicks() - 1);
+
+    const ticks: number[] = [];
+    for(let start = this.MIN_Y_VALUE; start <= this.MAX_Y_VALUE; start += tickDelta) {
+      ticks.push(Math.floor(start));
+    }
+
+    return ticks.reverse();
+  });
+
   public data = input.required<ColumnChart['data']>();
 
   public groupedData: Signal<GroupedChartData> = computed(() => {

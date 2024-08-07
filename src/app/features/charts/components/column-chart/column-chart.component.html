@@ -1,31 +1,51 @@
-<div class="chart-area">
-  <div class="chart-content h-96 bg-slate-50 flex gap-4">
-    @for (oneDataSet of groupedDataEntriesY(); track oneDataSet.x) {
-      <div class="flex gap-1 flex-1 bg-red-50 items-end justify-center">
-        @for (oneBarData of oneDataSet; let index = $index; track oneBarData) {
-          <div class="{{ index | chartBarColor }} block w-4" [style.height.%]="oneBarData.y">
-          </div>
+<div class="chart">
+  <div class="chart-wrapper">
+    <div class="chart-bg-scale">
+      @for (oneTickValue of yAxisTicks(); let isLast = $last; track oneTickValue) {
+        @if (!isLast) {
+          <span class="chart-y-axis-bg-tick"></span>
         }
-      </div>
-    }
+      }
+    </div>
+
+    <div class="chart-content">
+      @for (oneDataSet of groupedDataEntriesY(); track oneDataSet.x) {
+        <div class="chart-bars">
+          @for (oneBarData of oneDataSet; let index = $index; track oneBarData) {
+            <div class="{{ index | chartBarColor }} chart-data-bar" [style.height.%]="oneBarData.y">
+            </div>
+          }
+        </div>
+      }
+    </div>
   </div>
 
-  <div class="chart-y-axis">
-    <span class="chart-y-axis-tick">0</span>
-    <span class="chart-y-axis-tick">20</span>
-    <span class="chart-y-axis-tick">40</span>
-    <span class="chart-y-axis-tick">60</span>
-    <span class="chart-y-axis-tick">80</span>
-    <span class="chart-y-axis-tick">100</span>
-  </div>
-
-  <div class="chart-x-axis">
+  <ul class="chart-x-axis">
     @for (oneDataSetXLabel of groupedDataEntriesX(); track oneDataSetXLabel) {
-      <div class="flex-1 text-center ">
-        {{ oneDataSetXLabel }}
-      </div>
+      <li class="chart-x-axis-label">
+        <span>{{ oneDataSetXLabel }}</span>
+      </li>
     }
-  </div>
+  </ul>
+
+  <ul class="chart-y-axis">
+    @for (oneTickValue of yAxisTicks(); let index = $index; let count = $count; let isLast = $last; let isFirst = $first; track oneTickValue) {
+      @if (!isLast) {
+        <li class="chart-y-axis-tick">
+          <span
+            class="y-tick-label"
+            [ngClass]="{'max-y-tick-label': isFirst}"
+          >
+            {{ oneTickValue | number }}
+          </span>
+
+          @if (index + 1 === count - 1) {
+            <span class="y-tick-label min-y-tick-label">{{ yAxisTicks()[count - 1] | number }}</span>
+          }
+        </li>
+      }
+    }
+  </ul>
 </div>
 
 <div class="chart-legend flex justify-center">

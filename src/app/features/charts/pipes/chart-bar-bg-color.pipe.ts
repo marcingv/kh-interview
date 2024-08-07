@@ -6,8 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ChartBarBgColorPipe implements PipeTransform {
   private readonly CSS_CLASSES: string[] = [
-    'bg-violet-500',
-    'bg-red-400',
+    'bg-violet-400',
+    'bg-rose-400',
     'bg-orange-400'
   ];
 
