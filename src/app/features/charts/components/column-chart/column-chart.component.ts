@@ -119,22 +119,22 @@ export class ColumnChartComponent {
     }
 
     const orderedXValues: number[] = Object.keys(normalizedDataMap).map((x) => +x).sort();
-    const res: {
+    const orderedResult: {
       [x: number]: Array<{ seriesName: DataSeriesName, y: number }>
     } = {};
 
     orderedXValues.forEach((x: number) => {
       const xDataSeries = normalizedDataMap[x];
-      res[x] = [];
+      orderedResult[x] = [];
 
       for (let dataSeriesName in xDataSeries) {
-        res[x].push({
+        orderedResult[x].push({
           seriesName: dataSeriesName,
           y: xDataSeries[dataSeriesName]
         });
       }
     });
 
-    return res;
+    return orderedResult;
   }
 }

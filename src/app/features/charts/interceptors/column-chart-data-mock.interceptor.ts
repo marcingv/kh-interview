@@ -14,6 +14,12 @@ import {
 } from '../mocks/column-chart-data.mock';
 import type { ColumnChart } from '../models/column-chart.model';
 
+const MOCKS_MAP: { [id: ColumnChart['id']]: ColumnChart['data'] } = {
+  'test1': COLUMN_CHART_DATA_MOCK_1,
+  'test2': COLUMN_CHART_DATA_MOCK_2,
+  'emptyChart': []
+};
+
 export const columnChartDataMockInterceptor: HttpInterceptorFn = (
   request: HttpRequest<unknown>,
   next: HttpHandlerFn
@@ -25,9 +31,9 @@ export const columnChartDataMockInterceptor: HttpInterceptorFn = (
     const responseDelayMs = Math.floor(Math.random() * 1001) + 1000;
     const isRequestSuccessful = Math.random() < 0.9;
 
-    const mockedData: ColumnChart['data'] = request.url.endsWith('test2') ?
-      COLUMN_CHART_DATA_MOCK_2 :
-      COLUMN_CHART_DATA_MOCK_1;
+    const requestPaths: string[] = request.url.split('/');
+    const chartId: ColumnChart['id'] = requestPaths[requestPaths.length - 1];
+    const mockedData: ColumnChart['data'] = MOCKS_MAP[chartId] ?? COLUMN_CHART_DATA_MOCK_1;
 
     return of(mockedData).pipe(
       delay(responseDelayMs),

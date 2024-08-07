@@ -33,20 +33,26 @@
 
       <div class="chart-content-wrapper">
         <div class="chart-content">
-          @for (oneXDataSeries of xAxisData() | keyvalue; track oneXDataSeries.key) {
-            <div class="chart-bars-group">
-              <div class="chart-bars">
-                @for (itemData of oneXDataSeries.value; track itemData) {
-                  <div
-                    [style.height.%]="itemData.y"
-                    class="data-bar {{ seriesLabelColorClass()[itemData.seriesName] }}"
-                    [title]="itemData.seriesName"
-                  ></div>
-                }
-              </div>
-
-              <div class="x-tick-label">{{ oneXDataSeries.key }}</div>
+          @if (!dataSeries().length) {
+            <div class="empty-data-message">
+              <p>Chart data is empty. There is nothing to display.</p>
             </div>
+          } @else {
+            @for (oneXDataSeries of xAxisData() | keyvalue; track oneXDataSeries.key) {
+              <div class="chart-bars-group">
+                <div class="chart-bars">
+                  @for (itemData of oneXDataSeries.value; track itemData) {
+                    <div
+                      [style.height.%]="itemData.y"
+                      class="data-bar {{ seriesLabelColorClass()[itemData.seriesName] }}"
+                      [title]="itemData.seriesName"
+                    ></div>
+                  }
+                </div>
+
+                <div class="x-tick-label">{{ oneXDataSeries.key }}</div>
+              </div>
+            }
           }
         </div>
       </div>

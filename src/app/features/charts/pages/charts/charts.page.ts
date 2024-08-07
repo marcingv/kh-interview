@@ -17,6 +17,7 @@ import { ColumnChartComponent } from '../../components/column-chart';
 export class ChartsPageComponent {
   public chartsIds = signal<Array<ColumnChart['id']>>([
     'test1',
-    'test2'
+    'test2',
+    'emptyChart',
   ]);
 }

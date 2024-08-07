@@ -87,3 +87,12 @@ li.y-axis-tick:last-of-type {
 .legend-item-icon {
   @apply inline-block size-2 rounded-full;
 }
+
+/** Empty data **/
+.empty-data-message {
+  @apply flex items-center justify-center absolute left-0 right-0 top-0 bottom-0;
+}
+
+.empty-data-message p {
+ @apply p-4 rounded bg-slate-200 text-slate-500;
+}
