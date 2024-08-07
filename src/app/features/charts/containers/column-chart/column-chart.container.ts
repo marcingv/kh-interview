@@ -38,11 +38,11 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ColumnChartContainerComponent {
+  protected readonly CHART_HEIGHT_CSS_CLASS: string = 'h-96';
+
   private service = inject(ChartsService);
 
   public chartId = input.required<ColumnChart['id']>();
-
-  public chartData = signal<ColumnChart['data']>([]);
 
   public chartDataSeries = signal<DataSeries[]>([]);
 
@@ -59,15 +59,14 @@ export class ColumnChartContainerComponent {
         this.isLoadingData.set(true);
         this.loadingError.set(null);
       }),
-      switchMap((id) => {
+      switchMap((id: ColumnChart['id']) => {
         return this.service.getColumnChartDataById(id).pipe(
           tap((chartData) => {
             this.isLoadingData.set(false);
-            this.chartData.set(chartData);
             this.chartDataSeries.set(this.mapChartData(chartData));
           }),
           catchError((error: HttpErrorResponse) => {
-            this.loadingError.set(error.message);
+            this.loadingError.set(`Could not load chart "${id}". An error occurred: ${error.message}`);
             this.isLoadingData.set(false);
 
             return of();

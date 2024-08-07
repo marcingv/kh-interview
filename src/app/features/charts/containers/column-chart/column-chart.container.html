@@ -3,17 +3,19 @@
 } @else if (loadingError()) {
   <ng-container *ngTemplateOutlet="error"></ng-container>
 } @else {
-  <!--  <app-column-chart [data]="chartData()" />-->
-
-  <div class="mt-4">
-    <app-column-chart-v2 [dataSeries]="chartDataSeries()"></app-column-chart-v2>
-  </div>
+    <app-column-chart-v2
+      [dataSeries]="chartDataSeries()"
+      [cssClass]="CHART_HEIGHT_CSS_CLASS"
+    ></app-column-chart-v2>
 }
 
 <ng-template #loading>
-  <p class="p-4 bg-slate-50 text-center">Loading data ...</p>
+  <p
+    class="{{ CHART_HEIGHT_CSS_CLASS }} flex items-center justify-center p-4 bg-slate-50 animate-pulse">
+    <span>Loading data ...</span>
+  </p>
 </ng-template>
 
 <ng-template #error>
-  <p class="p-4 bg-red-50 text-center">{{ loadingError() }}</p>
+  <p class="{{ CHART_HEIGHT_CSS_CLASS }} flex items-center justify-center p-4 bg-red-50">{{ loadingError() }}</p>
 </ng-template>

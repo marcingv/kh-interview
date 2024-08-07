@@ -24,6 +24,7 @@ export class ColumnChartV2Component {
   private readonly DEFAULT_Y_NUM_OF_TICKS: number = 6;
   private readonly FALLBACK_BG_COLOR: string = 'bg-gray-300';
 
+  public cssClass = input<string>('');
   public chartHeightPx = input<number>(400);
   public dataSeries = input.required<DataSeries[]>();
   public dataSeriesBgColors = input<string[]>([

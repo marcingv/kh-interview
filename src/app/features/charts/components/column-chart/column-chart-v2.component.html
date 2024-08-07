@@ -1,4 +1,4 @@
-<div class="chart-wrapper" [style.height.px]="chartHeightPx()">
+<div class="chart-wrapper {{ cssClass() }}">
   <div class="y-axis-wrapper">
     <ul class="y-axis">
       @for (oneTickValue of yAxisTicks(); let index = $index; let count = $count; let isLast = $last; let isFirst = $first; track oneTickValue) {

@@ -6,7 +6,6 @@ export const COLUMN_CHART_DATA_MOCK: ColumnChart['data'] = [
     x: 2021,
     y: 76
   },
-
   {
     label: 'Rating 1',
     x: 2019,
