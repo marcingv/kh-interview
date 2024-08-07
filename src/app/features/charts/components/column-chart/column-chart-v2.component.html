@@ -33,15 +33,16 @@
 
       <div class="chart-content-wrapper">
         <div class="chart-content">
-          <div class="chart-bars-group">
-            <div class="chart-bars">Column</div>
-            <div class="chart-x-tick">X Label</div>
-          </div>
-
-          <div class="chart-bars-group">
-            <div class="chart-bars">Column</div>
-            <div class="chart-x-tick">X Label</div>
-          </div>
+          @for (oneXDataSeries of xAxisData() | keyvalue; track oneXDataSeries.key) {
+            <div class="chart-bars-group">
+              <div class="chart-bars flex gap-2 items-end">
+                @for (itemData of oneXDataSeries.value; track itemData) {
+                  <div [style.height.%]="itemData.y" class="w-4 bg-red-400"></div>
+                }
+              </div>
+              <div class="chart-x-tick">{{ oneXDataSeries.key }}</div>
+            </div>
+          }
         </div>
       </div>
     </div>

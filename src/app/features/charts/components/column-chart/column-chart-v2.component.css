@@ -2,19 +2,16 @@
 
 .chart-wrapper {
   @apply flex gap-12;
-  /*@apply bg-red-50 ;*/
   --x-axis-height: 40px;
 }
 
 .y-axis-wrapper {
   @apply ms-12;
-  @apply bg-slate-500;
   margin-bottom: calc(var(--x-axis-height));
 }
 
 .chart-pane-wrapper {
   @apply flex-1 relative;
-  /*@apply bg-orange-300;*/
 }
 
 .chart-content-wrapper {
@@ -30,7 +27,7 @@
 }
 
 .chart-bars {
-  @apply flex-1 bg-red-50 min-w-32 justify-center;
+  @apply flex-1 justify-center;
 }
 
 .chart-x-tick {
@@ -42,7 +39,6 @@
 .chart-bg-scale {
   @apply flex flex-col absolute left-0 right-0 top-0;
   bottom: var(--x-axis-height);
-  /*@apply bg-red-500;*/
 }
 
 .char-bg-scale-tick {
@@ -55,7 +51,6 @@
 /** Y Axis **/
 ul.y-axis {
   @apply h-full flex flex-col text-end;
-  @apply bg-red-200;
 }
 
 li.y-axis-tick {

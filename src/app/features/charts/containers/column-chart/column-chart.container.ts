@@ -104,10 +104,6 @@ export class ColumnChartContainerComponent {
       return prev;
     }, dataSeriesByNames);
 
-
-    console.warn(chartData);
-    console.error(dataSeriesByNames);
-
     return Object.values(dataSeriesByNames).sort(this.sortDataSeriesByName);
   }
 
