@@ -1,10 +1,16 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ColumnChart } from '../../models/column-chart.model';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-column-chart',
   standalone: true,
-  imports: [],
+  imports: [
+    JsonPipe
+  ],
   templateUrl: './column-chart.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ColumnChartComponent {}
+export class ColumnChartComponent {
+  public data = input.required<ColumnChart['data']>();
+}

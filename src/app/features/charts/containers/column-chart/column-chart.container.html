@@ -1,1 +1,15 @@
-<app-column-chart />
+@if (isLoadingData()) {
+  <ng-container *ngTemplateOutlet="loading"></ng-container>
+} @else if (loadingError()) {
+  <ng-container *ngTemplateOutlet="error"></ng-container>
+} @else {
+  <app-column-chart [data]="chartData()" />
+}
+
+<ng-template #loading>
+  <p class="p-4 bg-slate-50 text-center">Loading data ...</p>
+</ng-template>
+
+<ng-template #error>
+  <p class="p-4 bg-red-50 text-center">{{ loadingError() }}</p>
+</ng-template>

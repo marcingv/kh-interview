@@ -1,1 +1,8 @@
-<app-column-chart-container />
+<div class="flex flex-col gap-4">
+  @for (oneChartId of chartsIds(); track oneChartId) {
+    <div class="border-b-2">
+    <app-column-chart-container [chartId]="oneChartId" />
+    </div>
+  }
+</div>
+
