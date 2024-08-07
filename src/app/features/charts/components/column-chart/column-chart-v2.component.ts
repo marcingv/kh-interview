@@ -22,12 +22,29 @@ export class ColumnChartV2Component {
   private readonly MAX_Y_VALUE: number = 100;
   private readonly MIN_Y_VALUE: number = 0;
   private readonly DEFAULT_Y_NUM_OF_TICKS: number = 6;
+  private readonly FALLBACK_BG_COLOR: string = 'bg-gray-300';
 
   public chartHeightPx = input<number>(400);
   public dataSeries = input.required<DataSeries[]>();
+  public dataSeriesBgColors = input<string[]>([
+    'bg-violet-400',
+    'bg-rose-400',
+    'bg-orange-400'
+  ]);
 
   public seriesLabels = computed(() => {
     return this.dataSeries().map((oneDataSeries) => oneDataSeries.name);
+  });
+
+  public seriesLabelColorClass = computed(() => {
+    const seriesColors: { [seriesName: DataSeriesName]: string } = {};
+
+    const colorsSet = this.dataSeriesBgColors();
+    this.seriesLabels().forEach((seriesName: string, index: number) => {
+      seriesColors[seriesName] = colorsSet.length ? colorsSet[index % colorsSet.length] : this.FALLBACK_BG_COLOR;
+    });
+
+    return seriesColors;
   });
 
   public yAxisNumOfTicks = input<number>(this.DEFAULT_Y_NUM_OF_TICKS);
@@ -96,16 +113,18 @@ export class ColumnChartV2Component {
     }
 
     const orderedXValues: number[] = Object.keys(normalizedDataMap).map((x) => +x).sort();
-    const res: { [x: number]: Array<{ seriesName: DataSeriesName, y: number }> } = {};
+    const res: {
+      [x: number]: Array<{ seriesName: DataSeriesName, y: number }>
+    } = {};
 
     orderedXValues.forEach((x: number) => {
       const xDataSeries = normalizedDataMap[x];
       res[x] = [];
 
-      for(let dataSeriesName in xDataSeries) {
+      for (let dataSeriesName in xDataSeries) {
         res[x].push({
           seriesName: dataSeriesName,
-          y: xDataSeries[dataSeriesName],
+          y: xDataSeries[dataSeriesName]
         });
       }
     });

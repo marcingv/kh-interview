@@ -26,7 +26,7 @@
       <ul class="chart-bg-scale">
         @for (oneTickValue of yAxisTicks(); let isLast = $last; track oneTickValue) {
           @if (!isLast) {
-            <li class="char-bg-scale-tick"></li>
+            <li class="chart-bg-scale-tick"></li>
           }
         }
       </ul>
@@ -35,12 +35,14 @@
         <div class="chart-content">
           @for (oneXDataSeries of xAxisData() | keyvalue; track oneXDataSeries.key) {
             <div class="chart-bars-group">
-              <div class="chart-bars flex gap-2 items-end">
+              <div class="chart-bars">
                 @for (itemData of oneXDataSeries.value; track itemData) {
-                  <div [style.height.%]="itemData.y" class="w-4 bg-red-400"></div>
+                  <div [style.height.%]="itemData.y"
+                       class="data-bar {{ seriesLabelColorClass()[itemData.seriesName] }}"></div>
                 }
               </div>
-              <div class="chart-x-tick">{{ oneXDataSeries.key }}</div>
+
+              <div class="x-tick-label">{{ oneXDataSeries.key }}</div>
             </div>
           }
         </div>
@@ -49,8 +51,12 @@
   </div>
 </div>
 
-<div class="flex flex-wrap gap-4 justify-center">
-  @for (oneLabel of seriesLabels(); track oneLabel) {
-    <div>{{ oneLabel }}</div>
+<div class="legend">
+  @for (seriesName of seriesLabels(); let index = $index; track seriesName) {
+    <div class="legend-item">
+      <span
+        class="legend-item-icon {{ seriesLabelColorClass()[seriesName] }}"></span>
+      <span>{{ seriesName }}</span>
+    </div>
   }
 </div>
