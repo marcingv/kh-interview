@@ -1,0 +1,55 @@
+<div class="chart-wrapper" [style.height.px]="chartHeightPx()">
+  <div class="y-axis-wrapper">
+    <ul class="y-axis">
+      @for (oneTickValue of yAxisTicks(); let index = $index; let count = $count; let isLast = $last; let isFirst = $first; track oneTickValue) {
+        @if (!isLast) {
+          <li class="y-axis-tick">
+          <span
+            class="y-axis-tick-label"
+            [ngClass]="{'max-y-axis-tick-label': isFirst}"
+          >
+            {{ oneTickValue | number }}
+          </span>
+
+            @if (index + 1 === count - 1) {
+              <span
+                class="y-axis-tick-label min-y-axis-tick-label">{{ yAxisTicks()[count - 1] | number }}</span>
+            }
+          </li>
+        }
+      }
+    </ul>
+  </div>
+
+  <div class="flex-1 flex flex-col gap-4">
+    <div class="chart-pane-wrapper">
+      <ul class="chart-bg-scale">
+        @for (oneTickValue of yAxisTicks(); let isLast = $last; track oneTickValue) {
+          @if (!isLast) {
+            <li class="char-bg-scale-tick"></li>
+          }
+        }
+      </ul>
+
+      <div class="chart-content-wrapper">
+        <div class="chart-content">
+          <div class="chart-bars-group">
+            <div class="chart-bars">Column</div>
+            <div class="chart-x-tick">X Label</div>
+          </div>
+
+          <div class="chart-bars-group">
+            <div class="chart-bars">Column</div>
+            <div class="chart-x-tick">X Label</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="flex flex-wrap gap-4 justify-center">
+  @for (oneLabel of seriesLabels(); track oneLabel) {
+    <div>{{ oneLabel }}</div>
+  }
+</div>

@@ -3,7 +3,9 @@
 } @else if (loadingError()) {
   <ng-container *ngTemplateOutlet="error"></ng-container>
 } @else {
-  <app-column-chart [data]="chartData()" />
+<!--  <app-column-chart [data]="chartData()" />-->
+
+  <app-column-chart-v2 [dataSeries]="chartDataSeries()"></app-column-chart-v2>
 }
 
 <ng-template #loading>
