@@ -1,6 +1,6 @@
 import type { ColumnChart } from '../models/column-chart.model';
 
-export const COLUMN_CHART_DATA_MOCK: ColumnChart['data'] = [
+export const COLUMN_CHART_DATA_MOCK_1: ColumnChart['data'] = [
   {
     label: 'Rating 2',
     x: 2021,
@@ -81,6 +81,57 @@ export const COLUMN_CHART_DATA_MOCK: ColumnChart['data'] = [
     x: 2023,
     y: 66
   }
+];
 
-  // [...]
+export const COLUMN_CHART_DATA_MOCK_2: ColumnChart['data'] = [
+  {
+    label: 'Rating 2',
+    x: 2021,
+    y: 76
+  },
+  {
+    label: 'Rating 1',
+    x: 2019,
+    y: 56
+  },
+  {
+    label: 'Rating 1',
+    x: 2019,
+    y: 23
+  },
+  {
+    label: 'Rating 1',
+    x: 2019,
+    y: 12
+  },
+  {
+    label: 'Rating 1',
+    x: 2022,
+    y: 38
+  },
+  {
+    label: 'Rating 2',
+    x: 2022,
+    y: 36
+  },
+  {
+    label: 'Rating 3',
+    x: 2019,
+    y: 66
+  },
+  {
+    label: 'Rating 3',
+    x: 2021,
+    y: 66
+  },
+  {
+    label: 'Rating 3',
+    x: 2022,
+    y: 66
+  },
+  {
+    label: 'Rating 4',
+    x: 2023,
+    y: 23
+  },
 ];

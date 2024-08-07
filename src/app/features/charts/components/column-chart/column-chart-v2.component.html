@@ -37,8 +37,11 @@
             <div class="chart-bars-group">
               <div class="chart-bars">
                 @for (itemData of oneXDataSeries.value; track itemData) {
-                  <div [style.height.%]="itemData.y"
-                       class="data-bar {{ seriesLabelColorClass()[itemData.seriesName] }}"></div>
+                  <div
+                    [style.height.%]="itemData.y"
+                    class="data-bar {{ seriesLabelColorClass()[itemData.seriesName] }}"
+                    [title]="itemData.seriesName"
+                  ></div>
                 }
               </div>
 
@@ -60,3 +63,4 @@
     </div>
   }
 </div>
+

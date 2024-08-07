@@ -31,7 +31,7 @@
 }
 
 .data-bar {
-  @apply w-5 rounded-t-md;
+  @apply w-5 rounded-t-md cursor-pointer hover:opacity-85;
 }
 
 /** X Axis **/

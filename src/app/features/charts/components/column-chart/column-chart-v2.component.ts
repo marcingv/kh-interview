@@ -30,7 +30,11 @@ export class ColumnChartV2Component {
   public dataSeriesBgColors = input<string[]>([
     'bg-violet-400',
     'bg-rose-400',
-    'bg-orange-400'
+    'bg-orange-400',
+    'bg-blue-400',
+    'bg-green-400',
+    'bg-gray-400',
+    'bg-pink-400',
   ]);
 
   public seriesLabels = computed(() => {
@@ -62,8 +66,9 @@ export class ColumnChartV2Component {
     return ticks.reverse();
   });
 
-  public xAxisData = computed(() => {
-    const dataSeries = this.dataSeries();
+  public xAxisData = computed(() => this.prepareXDataSeries(this.dataSeries()));
+
+  private prepareXDataSeries(dataSeries: DataSeries[]) {
     const xDataMap: {
       [x: number]: { [seriesName: DataSeriesName]: number[] }
     } = {};
@@ -131,5 +136,5 @@ export class ColumnChartV2Component {
     });
 
     return res;
-  });
+  }
 }
