@@ -1,1 +1,35 @@
-{{ data() | json }}
+<div class="chart-area">
+  <div class="chart-content h-96 bg-slate-50 flex gap-4">
+    @for (oneDataSet of groupedDataEntriesY(); track oneDataSet.x) {
+      <div class="flex gap-1 flex-1 bg-red-50 items-end">
+
+        @for (oneBarData of oneDataSet; track oneBarData) {
+          <div class="bg-purple-400" [style.height.%]="oneBarData.y">
+            {{ oneBarData | json }}
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="chart-y-axis"></div>
+
+  <div class="chart-x-axis flex gap-4">
+    @for (oneDataSetXLabel of groupedDataEntriesX(); track oneDataSetXLabel) {
+      <div class="flex-1 bg-red-50 text-center">
+        {{ oneDataSetXLabel }}
+      </div>
+    }
+  </div>
+</div>
+
+<div class="chart-legend flex justify-center">
+  <ul class="flex gap-4">
+    @for (oneItem of legend(); track oneItem) {
+      <li class="flex gap-4 items-center">
+        <span class="inline-block size-2 bg-purple-300 rounded-full"></span>
+        <span>{{ oneItem }}</span>
+      </li>
+    }
+  </ul>
+</div>

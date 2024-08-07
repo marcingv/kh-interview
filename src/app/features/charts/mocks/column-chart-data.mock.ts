@@ -2,6 +2,12 @@ import type { ColumnChart } from '../models/column-chart.model';
 
 export const COLUMN_CHART_DATA_MOCK: ColumnChart['data'] = [
   {
+    label: 'Rating 2',
+    x: 2021,
+    y: 76
+  },
+
+  {
     label: 'Rating 1',
     x: 2019,
     y: 56
@@ -38,11 +44,7 @@ export const COLUMN_CHART_DATA_MOCK: ColumnChart['data'] = [
     x: 2020,
     y: 66
   },
-  {
-    label: 'Rating2',
-    x: 2021,
-    y: 76
-  },
+
   {
     label: 'Rating 2',
     x: 2022,
