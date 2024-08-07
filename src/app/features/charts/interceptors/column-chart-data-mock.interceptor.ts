@@ -18,8 +18,11 @@ export const columnChartDataMockInterceptor: HttpInterceptorFn = (
     request.method === 'GET' &&
     request.url.startsWith('/api/column-chart-data')
   ) {
-    const responseDelayMs = 0;//Math.floor(Math.random() * 1001) + 1000;
-    const isRequestSuccessful = Math.random() < 0.9;
+    // const responseDelayMs = Math.floor(Math.random() * 1001) + 1000;
+    // const isRequestSuccessful = Math.random() < 0.9;
+
+    const responseDelayMs = 0;
+    const isRequestSuccessful = true;
 
     return of(COLUMN_CHART_DATA_MOCK).pipe(
       delay(responseDelayMs),

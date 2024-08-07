@@ -10,6 +10,7 @@ import {
   ColumnChartDataElement
 } from '../../models/column-chart.model';
 import { JsonPipe } from '@angular/common';
+import { ChartBarBgColorPipe } from '../../pipes/chart-bar-bg-color.pipe';
 
 interface GroupedChartData {
   [year: number]: Array<ColumnChartDataElement>;
@@ -20,9 +21,11 @@ interface GroupedChartData {
   selector: 'app-column-chart',
   standalone: true,
   imports: [
-    JsonPipe
+    JsonPipe,
+    ChartBarBgColorPipe
   ],
   templateUrl: './column-chart.component.html',
+  styleUrl: './column-chart.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ColumnChartComponent {

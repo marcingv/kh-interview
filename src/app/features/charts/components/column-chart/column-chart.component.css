@@ -1,0 +1,18 @@
+.chart-area {
+  @apply relative;
+}
+
+.chart-x-axis {
+  @apply bg-orange-500;
+  @apply flex items-center gap-4 h-8;
+}
+
+.chart-y-axis {
+  @apply flex flex-col;
+  @apply absolute top-0 left-0 bottom-0;
+  @apply bg-red-500;
+}
+
+.chart-y-axis-tick {
+  @apply flex-1;
+}

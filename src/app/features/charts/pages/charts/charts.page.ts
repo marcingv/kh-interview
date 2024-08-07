@@ -9,11 +9,12 @@ import {
 } from '../../containers/column-chart/column-chart.container';
 import type { ColumnChart } from '../../models/column-chart.model';
 import { JsonPipe } from '@angular/common';
+import { CardComponent } from '../../../../shared/components/card';
 
 @Component({
   selector: 'app-charts-page',
   standalone: true,
-  imports: [ColumnChartContainerComponent, JsonPipe],
+  imports: [ColumnChartContainerComponent, JsonPipe, CardComponent],
   templateUrl: './charts.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -1,22 +1,27 @@
 <div class="chart-area">
   <div class="chart-content h-96 bg-slate-50 flex gap-4">
     @for (oneDataSet of groupedDataEntriesY(); track oneDataSet.x) {
-      <div class="flex gap-1 flex-1 bg-red-50 items-end">
-
-        @for (oneBarData of oneDataSet; track oneBarData) {
-          <div class="bg-purple-400" [style.height.%]="oneBarData.y">
-            {{ oneBarData | json }}
+      <div class="flex gap-1 flex-1 bg-red-50 items-end justify-center">
+        @for (oneBarData of oneDataSet; let index = $index; track oneBarData) {
+          <div class="{{ index | chartBarColor }} block w-4" [style.height.%]="oneBarData.y">
           </div>
         }
       </div>
     }
   </div>
 
-  <div class="chart-y-axis"></div>
+  <div class="chart-y-axis">
+    <span class="chart-y-axis-tick">0</span>
+    <span class="chart-y-axis-tick">20</span>
+    <span class="chart-y-axis-tick">40</span>
+    <span class="chart-y-axis-tick">60</span>
+    <span class="chart-y-axis-tick">80</span>
+    <span class="chart-y-axis-tick">100</span>
+  </div>
 
-  <div class="chart-x-axis flex gap-4">
+  <div class="chart-x-axis">
     @for (oneDataSetXLabel of groupedDataEntriesX(); track oneDataSetXLabel) {
-      <div class="flex-1 bg-red-50 text-center">
+      <div class="flex-1 text-center ">
         {{ oneDataSetXLabel }}
       </div>
     }
@@ -25,9 +30,9 @@
 
 <div class="chart-legend flex justify-center">
   <ul class="flex gap-4">
-    @for (oneItem of legend(); track oneItem) {
-      <li class="flex gap-4 items-center">
-        <span class="inline-block size-2 bg-purple-300 rounded-full"></span>
+    @for (oneItem of legend(); let index = $index; track oneItem) {
+      <li class="flex gap-2 items-center">
+        <span class="{{ index | chartBarColor }} inline-block size-2 rounded-full"></span>
         <span>{{ oneItem }}</span>
       </li>
     }
